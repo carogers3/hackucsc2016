@@ -27,8 +27,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="53dp"
-        android:layout_marginEnd="53dp"
-        android:onClick="accesscamera"/>
+        android:layout_marginEnd="53dp"/>
+        //android:onClick="accesscamera"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -39,8 +39,8 @@
         android:layout_toLeftOf="@+id/camera"
         android:layout_marginRight="51dp"
         android:layout_marginEnd="51dp"
-        android:layout_alignBottom="@+id/camera"
-        android:onClick="dropPin"/>
+        android:layout_alignBottom="@+id/camera"/>
+        //android:onClick="dropPin"/>
 </RelativeLayout>
 
 </RelativeLayout>
