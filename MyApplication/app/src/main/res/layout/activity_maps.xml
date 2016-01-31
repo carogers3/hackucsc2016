@@ -6,7 +6,7 @@
     tools:context="com.example.caseychien.myapplication.MapsActivityActivity">
 
 <fragment
-    class="com.google.android.gms.maps.MapFragment"
+    class="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mapx"

@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,10 +25,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        Fragment map;
-        map = getSupportFragmentManager().findFragmentById(R.id.mapx);
-        System.out.println("testing" + map);
-        //map.getMapAsync(this);
+        SupportMapFragment map;
+        map = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapx);
+        map.getMapAsync(this);
     }
 
 
@@ -45,24 +45,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Enable MyLocation Layer of Google Map
-        mMap.setMyLocationEnabled(true);
+        try {
+            mMap.setMyLocationEnabled(true);
 
-        // Get LocationManager object from System Service LOCATION_SERVICE
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // Create a criteria object to retrieve provider
-        Criteria criteria = new Criteria();
+            // Get LocationManager object from System Service LOCATION_SERVICE
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // Get the name of the best provider
-        String provider = locationManager.getBestProvider(criteria, true);
+            // Create a criteria object to retrieve provider
+            Criteria criteria = new Criteria();
 
-        // Get Current Location
-        Location myLocation = locationManager.getLastKnownLocation(provider);
-        // Add a marker in Sydney and move the camera
-        double latitude = myLocation.getLatitude();
-        double longitude = myLocation.getLongitude();
-        LatLng sydney = new LatLng(latitude,longitude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            // Get the name of the best provider
+            String provider = locationManager.getBestProvider(criteria, true);
+
+            // Get Current Location
+            Location myLocation = locationManager.getLastKnownLocation(provider);
+            // Add a marker in Sydney and move the camera
+            double latitude = myLocation.getLatitude();
+            double longitude = myLocation.getLongitude();
+            LatLng sydney = new LatLng(latitude,longitude);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+        } catch(SecurityException e) {
+            Log.e("Tag", "User failed to give me location.");
+        }
     }
 }
