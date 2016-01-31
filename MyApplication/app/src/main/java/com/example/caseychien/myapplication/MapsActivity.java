@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.location.Criteria;
 import android.location.LocationManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -23,9 +24,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        Fragment map;
+        map = getSupportFragmentManager().findFragmentById(R.id.mapx);
+        System.out.println("testing" + map);
+        //map.getMapAsync(this);
     }
 
 
