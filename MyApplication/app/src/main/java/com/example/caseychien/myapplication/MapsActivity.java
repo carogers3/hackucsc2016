@@ -1,6 +1,8 @@
 package com.example.caseychien.myapplication;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.Criteria;
 import android.location.LocationManager;
@@ -15,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -61,19 +64,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             // Get Current Location
             Location myLocation = locationManager.getLastKnownLocation(provider);
-            // Add a marker in Sydney and move the camera
+            // Add a marker and move the camera
             double latitude = myLocation.getLatitude();
             double longitude = myLocation.getLongitude();
-            LatLng currentLocation = new LatLng(latitude,longitude);
-            mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are here"));
+            LatLng currentLocation = new LatLng(latitude, longitude);
+            Marker SlugAlert = mMap.addMarker(new MarkerOptions()
+                    .position(currentLocation)
+                    .draggable(true));
+            mMap.addMarker(new MarkerOptions().position(currentLocation).title("Slug Alert"));
+            SQLiteDatabase mydatabase = openOrCreateDatabase("Found Slugs",MODE_PRIVATE,null);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
-            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
-        } catch(SecurityException e) {
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+        } catch (SecurityException e) {
             Log.e("Tag", "User failed to give me location.");
         }
+
+
+
+        /*@Override
+        public void onMapReady(mMap) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(10, 10))
+                    .title("Slug Alert"));
+        }*/
+
+
+
     }
-    public void accesscamera(View view){}
 }
+
+
+
+
+
 
 
 
