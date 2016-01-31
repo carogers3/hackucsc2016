@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -71,4 +72,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e("Tag", "User failed to give me location.");
         }
     }
+    public void accesscamera(View view){}
 }
+
+
+
